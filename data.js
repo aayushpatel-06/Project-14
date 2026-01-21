@@ -3,7 +3,7 @@
 =========================== */
 
 window.VAL_DATA = {
-  startLine: "Welcome to your Valentine surprise 😳💗",
+  startLine: "Welcome to your Valentine surprise 🤭💗",
 
   // Love letter (typewriter will reveal this)
   letter: `                                                                                               
