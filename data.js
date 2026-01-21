@@ -35,7 +35,7 @@ Niti… 💗
   ],
 
   // Proposal messages
-  yesMessage: "Happy Valentine’s Day My Love ❤️🌹",
+  yesMessage: "Wishing you a Happy Valentine’s Day my Love ❤️🌹",
   noMessage: "Wrong answer detected 😤💗 Try again 😏",
 
   // Gift screen text extras (we can expand later if you want)
