@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Niti 💗</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="theme-premium">
+
+  <!-- background -->
+  <div class="bg" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div id="float-layer"></div>
+    <div class="grain"></div>
+  </div>
+
+  <!-- audio -->
+  <audio id="music" loop>
+    <source src="assets/music.webm" type="audio/mpeg" />
+  </audio>
+
+  <!-- APP -->
+  <main class="app">
+
+    <!-- STEP 0: Start -->
+    <section class="step active" id="step-start">
+
+        <button class="musicBtn mainMusic" id="musicBtn" aria-label="Toggle music">
+            <span id="musicIcon">🔇</span>
+            <span class="musicText">Music</span>
+        </button>
+
+      <h1 class="h1">Hello Niti 💗</h1>
+      <p class="p" id="startLine"></p>
+
+      <button class="btn primary" id="startBtn">Start 💗</button>
+
+      <p class="tiny">Tip: Turn on music for the best vibe 🎶</p>
+    </section>
+
+    <!-- STEP 1: Rose -->
+    <section class="step" id="step-rose">
+      <h2 class="h2">For you🌹</h2>
+      <p class="p">Touch the rose a few times.</p>
+
+      <div class="roseWrap">
+        <div class="rose" id="rose">🌹</div>
+
+        <!-- Heartbeat (real ECG infinite wave style) -->
+        <div class="heartbeat real" id="heartbeat" aria-hidden="true">
+            <div class="ecg-grid"></div>
+            <svg class="ecg-svg" viewBox="0 0 600 120" preserveAspectRatio="none">
+                <polyline id="ecgLine" points=""></polyline>
+            </svg>
+            <div class="scan"></div>
+        </div>
+
+      <div class="row">
+        <button class="btn ghost" id="back1">← Back</button>
+        <button class="btn primary hiddenNext" id="next1">Next →</button>
+      </div>
+    </section>
+
+    <!-- STEP 2: Letter -->
+    <section class="step" id="step-letter">
+      <h2 class="h2">A short letter 💌</h2>
+
+      <!-- tap to open -->
+      <div class="letterTapWrap" id="letterTapWrap">
+        <button class="letterTap" id="openLetterBtn" aria-label="Open letter">
+          💌
+        </button>
+        <p class="tiny letterHint" id="letterHint">Tap to open</p>
+      </div>
+
+      <div class="letterBox hidden" id="letterBox">
+        <p class="letter" id="letter"></p>
+      </div>
+
+      <div class="row">
+        <button class="btn ghost" id="back2">← Back</button>
+        <button class="btn primary hiddenNext" id="next2">Unlock game 🎮</button>
+      </div>
+    </section>
+
+    <!-- STEP 3: Game -->
+    <section class="step" id="step-game">
+      <h2 class="h2">Catch the Hearts💗</h2>
+      <p class="p">15 seconds. Show me your skills 😏</p>
+
+      <div class="gameHud">
+        <div class="hudItem">Time: <span id="timeLeft">15</span>s</div>
+        <div class="hudItem">Score: <span id="score">0</span></div>
+      </div>
+
+      <div class="gameArea" id="gameArea"></div>
+
+      <button class="btn primary" id="gameBtn">Start Game</button>
+
+      <div class="row">
+        <button class="btn ghost" id="back3">← Back</button>
+        <button class="btn primary" id="next3" disabled>Go next 💘</button>
+      </div>
+    </section>
+
+    <!-- STEP 4: Proposal -->
+    <section class="step" id="step-propose">
+      <h2 class="h2">Now the real QUESTION…</h2>
+      <p class="p bigQuestion">Will you be my Valentine, pls say yes? 👉👈</p>
+
+      <div class="row proposalRow" id="proposalRow">
+        <button class="btn primary" id="yesBtn">YES 💖</button>
+        <button class="btn ghost" id="noBtn">NO 🙄</button>
+      </div>
+
+      <p class="finalLine" id="finalLine"></p>
+    </section>
+
+    <!-- STEP 5: Gift -->
+    <section class="step" id="step-gift">
+      <h2 class="h2">Gift Unlocked 🎁</h2>
+
+      <div class="giftCard">
+        <h3 class="h3">Your Valentine Date Plan ✅</h3>
+        <ul class="plan">
+          <li><b>Place:</b> Your choice 😌</li>
+          <li><b>Date:</b> Your choice 💗</li>
+          <li><b>Time:</b> Your choice ⏰</li>
+        </ul>
+
+        <button class="btn primary" id="revealPhotoBtn">Reveal something Special 🥺</button>
+
+        <div class="photoWrap" id="photoWrap">
+          <img src="assets/image.jpeg" alt="Special photo" class="photo" />
+        </div>
+      </div>
+
+      <p class="tiny endNote" style="text-align: center; font-size: 18px">Happy Valentine’s Day Niti ❤️</p>
+      <p class="tiny endNote" style="text-align: center; font-size: 18px;">~ Made with love, by Aayush 🌹</p>
+    </section>
+
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

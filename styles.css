@@ -1,0 +1,678 @@
+/* ===========================
+   THEME (easy to change later)
+=========================== */
+:root{
+  --bg1:#fff1f6;
+  --bg2:#fffaf0;
+
+  --txt:#241013;
+  --muted: rgba(36,16,19,0.72);
+
+  --accent1:#ff2f6d;
+  --accent2:#ff7aa8;
+
+  --glass: rgba(255,255,255,0.42);
+  --stroke: rgba(255,255,255,0.72);
+
+  --shadow: 0 26px 85px rgba(0,0,0,0.22);
+
+  --r1: 26px;
+
+  --font1:"Playfair Display", serif;
+  --font2:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family: var(--font2);
+  color: var(--txt);
+  overflow-x:hidden;
+}
+
+/* ===========================
+   BACKGROUND
+=========================== */
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  background:
+    radial-gradient(circle at 18% 18%, #ffd1dc 0%, transparent 55%),
+    radial-gradient(circle at 82% 78%, #ffcba4 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+}
+
+.blob{
+  position:absolute;
+  width:560px; height:560px;
+  border-radius:50%;
+  filter: blur(60px);
+  opacity:.36;
+  animation: drift 12s ease-in-out infinite;
+}
+.b1{left:-180px; top:60px; background:#ff5c8a;}
+.b2{right:-220px; top:160px; background:#ffb199; animation-delay:-5s;}
+.b3{left:24%; bottom:-260px; background:#c8ffdf; animation-delay:-8s;}
+
+@keyframes drift{
+  0%,100%{ transform: translate(0,0) scale(1) }
+  50%{ transform: translate(90px, -40px) scale(1.10) }
+}
+
+#float-layer{
+  position:absolute; inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.float{
+  position:absolute;
+  user-select:none;
+  filter: blur(0.2px);
+  opacity: .25;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp{
+  0%{ transform: translateY(115vh) rotate(0deg) scale(1) }
+  100%{ transform: translateY(-25vh) rotate(360deg) scale(1.04) }
+}
+
+.grain{
+  position:absolute; inset:0;
+  opacity:.085;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.musicBtn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:none;
+  cursor:pointer;
+  padding:12px 16px;
+  border-radius:999px;
+
+  font-weight:900;
+  font-size:15px;
+
+  background: rgba(255,255,255,0.55);
+  border:1px solid rgba(255,255,255,0.72);
+
+  box-shadow: 0 14px 28px rgba(0,0,0,0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition: transform .15s ease;
+}
+.musicBtn:active{ transform: scale(.96); }
+.musicBtn.playing{ animation: pulse 1.2s infinite; }
+
+@keyframes pulse{
+  0%{ transform: scale(1); }
+  50%{ transform: scale(1.06); }
+  100%{ transform: scale(1); }
+}
+
+/* ===========================
+   APP LAYOUT
+=========================== */
+.app{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding: 30px 18px 40px; /* topbar space */
+}
+
+/* ===========================
+   STEPS (Wizard style)
+=========================== */
+.step{
+  width: min(980px, 92vw);
+  min-height: 640px;
+
+  padding: 56px 56px;
+
+  border-radius: 34px;
+  background: var(--glass);
+  border: 1px solid var(--stroke);
+
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  display:none;
+  position:relative;
+  overflow:hidden;
+}
+
+.step.active{
+  display:block;
+  animation: stepIn .65s cubic-bezier(.2,9,2,1);
+}
+
+@keyframes stepIn{
+  from{ opacity:0; transform: translateY(24px) scale(.985); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+.step::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.90), transparent 42%);
+  opacity:.45;
+  pointer-events:none;
+}
+
+/* ===========================
+   TYPOGRAPHY
+=========================== */
+.h1{
+  font-family: var(--font1);
+  font-size: clamp(40px, 5vw, 65px);
+  line-height: 1.02;
+  margin-bottom: 10px;
+}
+
+.h2{
+  font-family: var(--font1);
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.08;
+  margin-bottom: 6px;
+}
+
+.h3{
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.p{
+  color: var(--muted);
+  font-size: 26px;
+  line-height: 1.85;
+  max-width: 72ch;
+}
+
+.tiny{
+  margin-top: 22px;
+  font-size: 19px;
+  opacity: .78;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.btn{
+  border:none;
+  cursor:pointer;
+  border-radius: 20px;
+  padding: 14px 22px;
+  font-weight: 950;
+  font-size: 16px;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  position:relative;
+  overflow:hidden;
+  user-select:none;
+}
+
+.btn:active{ transform: scale(.97); }
+
+.btn.primary{
+  color:white;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  box-shadow: 0 16px 42px rgba(255, 61, 110, 0.28);
+}
+.btn.primary:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+}
+
+.btn.ghost{
+  background: rgba(255,255,255,0.58);
+  border: 1px solid rgba(255,255,255,0.72);
+  color: var(--txt);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.09);
+}
+.btn.ghost:hover{ transform: translateY(-2px); }
+
+.row{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center; /* center buttons */
+  margin-top: 26px;
+}
+
+/* ===========================
+   ROSE + HEARTBEAT
+=========================== */
+.roseWrap{
+  margin-top: 26px;
+  display:grid;
+  gap:18px;
+  place-items:center;
+}
+
+.rose{
+  font-size: 132px;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.14));
+  animation: floatRose 2.2s ease-in-out infinite;
+}
+@keyframes floatRose{
+  0%,100%{ transform: translateY(0px) }
+  50%{ transform: translateY(-14px) }
+}
+
+/* ===========================
+   REAL ECG HEARTBEAT (Movie style)
+=========================== */
+.heartbeat.real{
+  width: min(560px, 92%);
+  height: 92px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+}
+
+.ecg-grid{
+  position:absolute;
+  inset:0;
+  opacity: 0.26;
+  background-image:
+    linear-gradient(to right, rgba(255,77,109,0.33) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,77,109,0.33) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.ecg-svg{
+  position:absolute;
+  inset:0;
+}
+
+.ecg-svg polyline{
+  fill: none;
+  stroke: rgba(255, 61, 110, 0.95);
+  stroke-width: 3.6;
+  filter: drop-shadow(0 0 10px rgba(255, 61, 110, 0.35));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* scanning line */
+.scan{
+  position:absolute;
+  top:0;
+  left:-10px;
+  width: 4px;
+  height: 100%;
+  background: rgba(255, 61, 110, 0.75);
+  box-shadow: 0 0 20px rgba(255, 61, 110, 0.55);
+  opacity:0;
+}
+
+.heartbeat.real.running .scan{
+  opacity:1;
+  animation: scanMove 1.15s linear infinite;
+}
+
+@keyframes scanMove{
+  0%{ transform: translateX(-10px); }
+  100%{ transform: translateX(580px); }
+}
+
+/* ===========================
+   LETTER
+=========================== */
+.letterBox{
+  margin-top: 22px;
+  width: min(860px, 100%);
+  padding: 22px 22px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.50);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.12);
+}
+
+.letter{
+  font-size: 18px;
+  line-height: 1.9;
+  font-weight: 600;
+  color: rgba(36,16,19,0.86);
+  white-space: pre-wrap;
+}
+
+/* ===========================
+   GAME
+=========================== */
+.gameHud{
+  margin-top: 18px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.hudItem{
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.54);
+  border: 1px solid rgba(255,255,255,0.72);
+  font-weight: 900;
+}
+
+.gameArea{
+  margin-top: 18px;
+  width: min(920px, 100%);
+  height: 320px;
+
+  border-radius: 28px;
+  background: rgba(255,255,255,0.34);
+  border: 1px solid rgba(255,255,255,0.65);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  position:relative;
+  overflow:hidden;
+
+  box-shadow: 0 18px 55px rgba(0,0,0,0.12);
+}
+
+.heartTarget{
+  position:absolute;
+  font-size: 44px;
+  cursor:pointer;
+  user-select:none;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.10));
+  animation: popIn .20s ease;
+}
+@keyframes popIn{
+  from{ transform: scale(.6); opacity:0; }
+  to{ transform: scale(1); opacity:1; }
+}
+
+#gameBtn{
+  margin-top: 18px;
+}
+
+/* ===========================
+   GIFT
+=========================== */
+.giftCard{
+  margin-top: 18px;
+  width: min(900px, 100%);
+  padding: 22px;
+  border-radius: 28px;
+
+  background: rgba(255,255,255,0.50);
+  border: 1px solid rgba(255,255,255,0.72);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.12);
+}
+
+.plan{
+  margin: 10px 0 18px 18px;
+  color: rgba(36,16,19,0.82);
+  line-height: 1.9;
+  font-weight: 600;
+}
+
+.photoWrap{
+  margin-top: 18px;
+  display:none;
+}
+
+.photoWrap.show{
+  display:block;
+  animation: grandReveal 1s cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes grandReveal{
+  0%{
+    opacity: 0;
+    transform: translateY(26px) scale(0.92);
+    filter: blur(10px);
+  }
+  45%{
+    opacity: 1;
+    transform: translateY(-6px) scale(1.03);
+    filter: blur(3px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.photo{
+  width: min(620px, 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.80);
+  box-shadow:
+    0 22px 70px rgba(0,0,0,0.18),
+    0 0 0 10px rgba(255,255,255,0.20);
+  transform-origin: center;
+}
+
+/* ===========================
+   FINAL LINE
+=========================== */
+.finalLine{
+  margin-top: 18px;
+  font-size: 20px;
+  font-weight: 950;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media(max-width: 520px){
+  .musicText{ display:none; }
+
+  .step{
+    padding: 26px;
+    min-height: auto;
+    border-radius: 26px;
+  }
+
+  .p{ font-size: 21px; }
+  .tiny{ font-size: 17px; }
+
+  #step-start .btn{
+    width: 100%;
+    max-width: 280px;
+    padding: 16px 22px;
+    font-size: 17px;
+  }
+
+  .rose{ font-size: 100px; }
+  .gameArea{ height: 280px; }
+  .letter{ font-size: 16px; }
+}
+
+/* music button on main screen */
+.mainMusic{
+  position:absolute;
+  top: 18px;
+  right: 18px;
+}
+
+/* Start step button improvements */
+#step-start{
+  text-align: center; /* centers the content nicely */
+}
+
+#step-start .btn{
+  margin: 18px auto 0;  /* center horizontally */
+  padding: 18px 34px;   /* bigger button */
+  font-size: 18px;
+  border-radius: 22px;
+}
+
+/* Rose step title centered */
+#step-rose .h2,
+#step-rose .p{
+  text-align: center;
+}
+
+/* ===== FORCE BIG TEXT ON START SCREEN ===== */
+#step-start #startLine{
+  font-size: 34px !important;
+  line-height: 1.6 !important;
+  font-weight: 700 !important;
+  color: rgba(36,16,19,0.78) !important;
+}
+
+#step-start .tiny{
+  font-size: 24px !important;
+  line-height: 1.7 !important;
+  font-weight: 650 !important;
+}
+
+@media(max-width: 520px){
+  #step-start #startLine{
+    font-size: 22px !important;
+  }
+  #step-start .tiny{
+    font-size: 16px !important;
+  }
+}
+
+/* ===========================
+   Letter tap open interaction
+=========================== */
+.letterTapWrap{
+  margin-top: 14px;
+  display:grid;
+  place-items:center;
+  gap:10px;
+}
+
+.letterTap{
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.55);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.14);
+  cursor:pointer;
+  font-size: 58px;
+  display:grid;
+  place-items:center;
+  transition: transform .15s ease, filter .15s ease;
+}
+
+.letterTap:hover{
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.02);
+}
+
+.letterTap:active{
+  transform: scale(.96);
+}
+
+.letterHint{
+  margin-top: 6px;
+  opacity: .8;
+}
+
+.letterBox.hidden{
+  display:none;
+}
+
+.letterBox.open{
+  display:block;
+  animation: letterIn .55s cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes letterIn{
+  from{ opacity:0; transform: translateY(12px) scale(.98); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+/* Smooth disappear animation */
+.letterTapWrap{
+  transition:
+    opacity .45s ease,
+    transform .45s ease,
+    height .45s ease,
+    margin .45s ease,
+    padding .45s ease;
+}
+
+.letterTapWrap.hide{
+  opacity:0;
+  transform: translateY(-10px) scale(0.95);
+  pointer-events:none;
+
+  height:0;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+}
+
+.letterTap{
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.letterTap.hideBtn{
+  opacity:0;
+  transform: scale(0.5) rotate(-10deg);
+}
+
+.hiddenNext{
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  pointer-events: none;
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.hiddenNext.show{
+  opacity: 1;
+  transform: translateY(0px) scale(1);
+  pointer-events: auto;
+}
+
+/* Proposal question highlight */
+.bigQuestion{
+  margin-top: 12px;
+  font-size: 30px;
+  font-weight: 900;
+  color: rgba(36,16,19,0.88);
+  letter-spacing: 0.2px;
+}
+
+@media(max-width: 520px){
+  .bigQuestion{
+    font-size: 22px;
+  }
+}
+
+#step-propose{
+  position: relative;
+}
+
+#yesBtn{
+  z-index: 5;
+}
+
+#noBtn{
+  z-index: 4;
+}
+
+.proposalRow{
+  position: relative;
+  min-height: 90px;
+}
+
+/* Smooth NO movement (no lag) */
+#noBtn{
+  transition: transform 0.18s cubic-bezier(.2,.9,.2,1);
+  will-change: transform;
+}
