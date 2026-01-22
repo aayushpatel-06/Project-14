@@ -67,6 +67,12 @@ const musicIcon = $("musicIcon");
 
 const floatLayer = $("float-layer");
 
+const countdown = $("countdown");
+
+const kissPanel = $("kissPanel");
+const kissBtn = $("kissBtn");
+const kissText = $("kissText");
+
 /* ===========================
    Init content
 =========================== */
@@ -495,7 +501,7 @@ function endGame() {
   gameBtn.textContent = "Play again";
   gameBtn.disabled = false;
 
-  const target = 30;                  //No of hearts to be catched
+  const target = 2;                  //No of hearts to be catched
 
   if (score >= target) {
     next3.disabled = false;
@@ -572,12 +578,12 @@ function escapeNo() {
 
   // text change immediately (no late updates)
   if (noEscapes === 3) noBtn.textContent = "NO 😳";
-  if (noEscapes === 5) noBtn.textContent = "NO 🙄";
-  if (noEscapes === 7) noBtn.textContent = "NO 😭";
+  if (noEscapes === 5) noBtn.textContent = "STOP 🙄";
+  if (noEscapes === 7) noBtn.textContent = "STOPP 😭";
 
   if (noEscapes >= 9) {
     noLocked = true;
-    noBtn.textContent = "PLS YES 😭";
+    noBtn.textContent = "YES ONLY 😭";
 
     // return to center smoothly
     noX = 0;
@@ -603,11 +609,48 @@ noBtn.addEventListener("click", () => {
 yesBtn.addEventListener("click", (e) => {
   heartBurst(e.clientX, e.clientY);
   confettiBlast();
+
   finalLine.textContent = DATA.yesMessage;
 
-  setTimeout(() => {
-    showStep("gift");
-  }, 1100);
+  // disable buttons during countdown
+  yesBtn.disabled = true;
+  noBtn.disabled = true;
+
+  let n = 10;
+  countdown.textContent = n;
+  countdown.classList.add("show");
+
+  const timer = setInterval(() => {
+    n--;
+
+    if(n > 0){
+      countdown.textContent = n;
+      countdown.animate(
+        [
+          { transform: "scale(1)", opacity: 1 },
+          { transform: "scale(1.12)", opacity: 1 },
+          { transform: "scale(1)", opacity: 1 }
+        ],
+        { duration: 320, easing: "cubic-bezier(.2,.9,.2,1)" }
+      );
+    } else {
+      clearInterval(timer);
+      countdown.textContent = "💗";
+      countdown.animate(
+        [
+          { transform: "scale(1)", opacity: 1 },
+          { transform: "scale(1.25)", opacity: 1 },
+          { transform: "scale(0.92)", opacity: 0 }
+        ],
+        { duration: 520, easing: "cubic-bezier(.2,.9,.2,1)", fill: "forwards" }
+      );
+
+      setTimeout(() => {
+        countdown.classList.remove("show");
+        showStep("gift");
+      }, 520);
+    }
+  }, 720);
 });
 
 
@@ -648,13 +691,87 @@ function sparkleBurst(el){
   }
 }
 
+let kissCount = 0;
+
+function popKiss(){
+  const kiss = document.createElement("div");
+  kiss.textContent = "💋";
+  kiss.style.position = "fixed";
+  kiss.style.left = "50%";
+  kiss.style.top = "55%";
+  kiss.style.transform = "translate(-50%, -50%)";
+  kiss.style.fontSize = "72px";
+  kiss.style.zIndex = 999;
+  kiss.style.pointerEvents = "none";
+  kiss.style.filter = "drop-shadow(0 20px 35px rgba(0,0,0,0.25))";
+  document.body.appendChild(kiss);
+
+  kiss.animate(
+    [
+      { transform: "translate(-50%,-50%) scale(0.6)", opacity: 0 },
+      { transform: "translate(-50%,-50%) scale(1.18)", opacity: 1 },
+      { transform: "translate(-50%,-50%) scale(1)", opacity: 1 },
+      { transform: "translate(-50%,-90%) scale(1.05)", opacity: 0 }
+    ],
+    { duration: 980, easing: "cubic-bezier(.2,.9,.2,1)" }
+  );
+
+  setTimeout(() => kiss.remove(), 1000);
+}
+
+function updateKissText(){
+  if(!kissText) return;
+
+  if(kissCount === 0) kissText.textContent = "Send me a kiss 😳";
+  else if(kissCount === 1) kissText.textContent = "Aww… one more 🥹";
+  else if(kissCount === 2) kissText.textContent = "Again again 💋";
+  else if(kissCount === 4) kissText.textContent = "Stoppp I’m blushing 😭";
+  else if(kissCount === 7) kissText.textContent = "Okay one last? 😳💗";
+  else if(kissCount === 8) kissText.textContent = "More kisses pls 🚨💋";
+  else if(kissCount === 10) kissText.textContent = "Kisses received 😭💗✅";
+  else if(kissCount > 10) kissText.textContent = `Kisses received: ${kissCount} 💋✅`;
+
+  kissText.animate(
+    [
+      { transform: "translateY(0px)", opacity: 0.9 },
+      { transform: "translateY(-3px)", opacity: 1 },
+      { transform: "translateY(0px)", opacity: 0.9 }
+    ],
+    { duration: 260, easing: "ease-out" }
+  );
+}
+
+if(kissBtn){
+  kissBtn.addEventListener("click", () => {
+    kissCount++;
+    popKiss();
+    heartBurst(window.innerWidth/2, window.innerHeight/2);
+    updateKissText();
+
+    kissBtn.animate(
+      [
+        { transform: "scale(1)" },
+        { transform: "scale(0.92)" },
+        { transform: "scale(1.08)" },
+        { transform: "scale(1)" }
+      ],
+      { duration: 300, easing: "cubic-bezier(.2,.9,.2,1)" }
+    );
+  });
+}
+
 revealPhotoBtn.addEventListener("click", () => {
   photoWrap.classList.add("show");
 
-  // grand sparkle burst
+  // ✅ show kiss section after reveal
+  if(kissPanel) kissPanel.classList.add("show");
+
+  // reset kisses when photo opens
+  kissCount = 0;
+  updateKissText();
+
   sparkleBurst(photoWrap);
 
-  // button animation
   revealPhotoBtn.animate(
     [
       { transform: "scale(1)" },
