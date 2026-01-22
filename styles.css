@@ -1,22 +1,27 @@
 /* ===========================
-   THEME (easy to change later)
+   BEST MIX THEME ✅
+   Soft dark romantic base (80%)
+   Neon highlights (20%)
 =========================== */
 :root{
-  --bg1:#fff1f6;
-  --bg2:#fffaf0;
+  /* soft dark base (not pure black) */
+  --bg1:#0b0012;
+  --bg2:#150022;
 
-  --txt:#241013;
-  --muted: rgba(36,16,19,0.72);
+  /* warm romantic text */
+  --txt:#fff0f8;
+  --muted: rgba(255,240,248,0.72);
 
-  --accent1:#ff2f6d;
-  --accent2:#ff7aa8;
+  /* neon pop accents */
+  --accent1:#ff1744; /* neon red */
+  --accent2:#ff4fd8; /* neon pink */
 
-  --glass: rgba(255,255,255,0.42);
-  --stroke: rgba(255,255,255,0.72);
+  /* glass + soft borders */
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass2: rgba(12, 0, 18, 0.45);
+  --stroke: rgba(255, 145, 210, 0.16);
 
-  --shadow: 0 26px 85px rgba(0,0,0,0.22);
-
-  --r1: 26px;
+  --shadow: 0 30px 95px rgba(0,0,0,0.72);
 
   --font1:"Playfair Display", serif;
   --font2:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -24,6 +29,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
+
 body{
   font-family: var(--font2);
   color: var(--txt);
@@ -31,59 +37,66 @@ body{
 }
 
 /* ===========================
-   BACKGROUND
+   BACKGROUND (deep romantic)
 =========================== */
 .bg{
   position:fixed;
   inset:0;
   z-index:-5;
+
   background:
-    radial-gradient(circle at 18% 18%, #ffd1dc 0%, transparent 55%),
-    radial-gradient(circle at 82% 78%, #ffcba4 0%, transparent 60%),
+    radial-gradient(circle at 18% 18%, rgba(255, 79, 216, 0.16) 0%, transparent 58%),
+    radial-gradient(circle at 82% 78%, rgba(255, 23, 68, 0.14) 0%, transparent 62%),
+    radial-gradient(circle at 45% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
     linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
 }
 
+/* blobs = soft dreamy lights */
 .blob{
   position:absolute;
   width:560px; height:560px;
   border-radius:50%;
-  filter: blur(60px);
-  opacity:.36;
-  animation: drift 12s ease-in-out infinite;
+  filter: blur(110px);
+  opacity:.20;
+  animation: drift 15s ease-in-out infinite;
 }
-.b1{left:-180px; top:60px; background:#ff5c8a;}
-.b2{right:-220px; top:160px; background:#ffb199; animation-delay:-5s;}
-.b3{left:24%; bottom:-260px; background:#c8ffdf; animation-delay:-8s;}
+.b1{left:-200px; top:80px; background: rgba(255, 79, 216, 0.70);}
+.b2{right:-240px; top:180px; background: rgba(255, 23, 68, 0.62); animation-delay:-6s;}
+.b3{left:26%; bottom:-300px; background: rgba(255, 60, 150, 0.24); animation-delay:-10s;}
 
 @keyframes drift{
   0%,100%{ transform: translate(0,0) scale(1) }
-  50%{ transform: translate(90px, -40px) scale(1.10) }
+  50%{ transform: translate(70px, -30px) scale(1.08) }
 }
 
+/* floating emojis */
 #float-layer{
   position:absolute; inset:0;
   pointer-events:none;
   overflow:hidden;
 }
-
 .float{
   position:absolute;
   user-select:none;
-  filter: blur(0.2px);
-  opacity: .25;
+  opacity: .16;
+  filter: blur(0.1px);
   animation: floatUp linear infinite;
 }
 @keyframes floatUp{
   0%{ transform: translateY(115vh) rotate(0deg) scale(1) }
-  100%{ transform: translateY(-25vh) rotate(360deg) scale(1.04) }
+  100%{ transform: translateY(-25vh) rotate(320deg) scale(1.04) }
 }
 
+/* grain */
 .grain{
   position:absolute; inset:0;
-  opacity:.085;
+  opacity:.08;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
+/* ===========================
+   MUSIC BTN (soft dark)
+=========================== */
 .musicBtn{
   display:flex;
   align-items:center;
@@ -96,17 +109,18 @@ body{
   font-weight:900;
   font-size:15px;
 
-  background: rgba(255,255,255,0.55);
-  border:1px solid rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255, 145, 210, 0.14);
 
-  box-shadow: 0 14px 28px rgba(0,0,0,0.10);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.44);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
   transition: transform .15s ease;
+  color: var(--txt);
 }
 .musicBtn:active{ transform: scale(.96); }
-.musicBtn.playing{ animation: pulse 1.2s infinite; }
+.musicBtn.playing{ animation: pulse 1.35s infinite; }
 
 @keyframes pulse{
   0%{ transform: scale(1); }
@@ -121,25 +135,29 @@ body{
   min-height:100vh;
   display:grid;
   place-items:center;
-  padding: 30px 18px 40px; /* topbar space */
+  padding: 30px 18px 40px;
 }
 
 /* ===========================
-   STEPS (Wizard style)
+   STEPS (soft glass card)
 =========================== */
 .step{
   width: min(980px, 92vw);
   min-height: 640px;
-
   padding: 56px 56px;
 
   border-radius: 34px;
-  background: var(--glass);
-  border: 1px solid var(--stroke);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.08),
+    rgba(12,0,18,0.42)
+  );
+
+  border: 1px solid rgba(255, 145, 210, 0.14);
 
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
   display:none;
   position:relative;
@@ -148,21 +166,32 @@ body{
 
 .step.active{
   display:block;
-  animation: stepIn .65s cubic-bezier(.2,9,2,1);
+  animation: stepIn .7s cubic-bezier(.2,.9,.2,1);
 }
-
 @keyframes stepIn{
-  from{ opacity:0; transform: translateY(24px) scale(.985); }
+  from{ opacity:0; transform: translateY(26px) scale(.985); }
   to{ opacity:1; transform: translateY(0) scale(1); }
 }
 
-.step::before{
+/* subtle premium glow border (pulse) */
+.step::after{
   content:"";
   position:absolute;
-  inset:-2px;
-  background: radial-gradient(circle at top left, rgba(255,255,255,0.90), transparent 42%);
-  opacity:.45;
+  inset:-3px;
+  border-radius: inherit;
   pointer-events:none;
+
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,79,216,0.14), transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(255,23,68,0.12), transparent 52%);
+
+  opacity: 0.55;
+  filter: blur(22px);
+  animation: romanticPulse 3.3s ease-in-out infinite;
+}
+@keyframes romanticPulse{
+  0%,100%{ opacity: 0.45; transform: scale(1); }
+  50%{ opacity: 0.72; transform: scale(1.012); }
 }
 
 /* ===========================
@@ -173,28 +202,26 @@ body{
   font-size: clamp(40px, 5vw, 65px);
   line-height: 1.02;
   margin-bottom: 10px;
+  text-shadow: 0 0 22px rgba(255, 79, 216, 0.10);
 }
-
 .h2{
   font-family: var(--font1);
   font-size: clamp(36px, 5vw, 58px);
   line-height: 1.08;
   margin-bottom: 6px;
+  text-shadow: 0 0 20px rgba(255, 23, 68, 0.10);
 }
-
 .h3{
   font-size: 18px;
-  font-weight: 900;
+  font-weight: 950;
   margin-bottom: 10px;
 }
-
 .p{
   color: var(--muted);
   font-size: 26px;
   line-height: 1.85;
   max-width: 72ch;
 }
-
 .tiny{
   margin-top: 22px;
   font-size: 19px;
@@ -202,7 +229,7 @@ body{
 }
 
 /* ===========================
-   BUTTONS
+   BUTTONS (neon only here ✅)
 =========================== */
 .btn{
   border:none;
@@ -216,24 +243,25 @@ body{
   overflow:hidden;
   user-select:none;
 }
-
 .btn:active{ transform: scale(.97); }
 
 .btn.primary{
   color:white;
-  background: linear-gradient(90deg, var(--accent1), var(--accent2));
-  box-shadow: 0 16px 42px rgba(255, 61, 110, 0.28);
+  background: linear-gradient(92deg, var(--accent1), var(--accent2));
+  box-shadow:
+    0 18px 62px rgba(255, 23, 68, 0.22),
+    0 0 48px rgba(255, 79, 216, 0.10);
 }
 .btn.primary:hover{
   transform: translateY(-2px);
-  filter: brightness(1.03);
+  filter: brightness(1.06);
 }
 
 .btn.ghost{
-  background: rgba(255,255,255,0.58);
-  border: 1px solid rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255, 145, 210, 0.14);
   color: var(--txt);
-  box-shadow: 0 14px 34px rgba(0,0,0,0.09);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.32);
 }
 .btn.ghost:hover{ transform: translateY(-2px); }
 
@@ -242,12 +270,12 @@ body{
   gap:14px;
   flex-wrap:wrap;
   align-items:center;
-  justify-content:center; /* center buttons */
+  justify-content:center;
   margin-top: 26px;
 }
 
 /* ===========================
-   ROSE + HEARTBEAT
+   ROSE
 =========================== */
 .roseWrap{
   margin-top: 26px;
@@ -255,11 +283,10 @@ body{
   gap:18px;
   place-items:center;
 }
-
 .rose{
   font-size: 132px;
-  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.14));
-  animation: floatRose 2.2s ease-in-out infinite;
+  filter: drop-shadow(0 20px 34px rgba(0,0,0,0.60));
+  animation: floatRose 2.5s ease-in-out infinite;
 }
 @keyframes floatRose{
   0%,100%{ transform: translateY(0px) }
@@ -267,7 +294,7 @@ body{
 }
 
 /* ===========================
-   REAL ECG HEARTBEAT (Movie style)
+   ECG HEARTBEAT (neon highlight ✅)
 =========================== */
 .heartbeat.real{
   width: min(560px, 92%);
@@ -276,52 +303,47 @@ body{
   overflow: hidden;
   border-radius: 18px;
 
-  background: rgba(255,255,255,0.35);
-  border: 1px solid rgba(255,255,255,0.72);
-  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 145, 210, 0.14);
+  box-shadow: 0 18px 52px rgba(0,0,0,0.55);
 }
-
 .ecg-grid{
   position:absolute;
   inset:0;
-  opacity: 0.26;
+  opacity: 0.7;
   background-image:
-    linear-gradient(to right, rgba(255,77,109,0.33) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,77,109,0.33) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 145, 210, 0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 145, 210, 0.08) 1px, transparent 1px);
   background-size: 26px 26px;
 }
-
 .ecg-svg{
   position:absolute;
   inset:0;
 }
-
 .ecg-svg polyline{
   fill: none;
-  stroke: rgba(255, 61, 110, 0.95);
-  stroke-width: 3.6;
-  filter: drop-shadow(0 0 10px rgba(255, 61, 110, 0.35));
+  stroke: rgba(255, 79, 216, 0.95);
+  stroke-width: 3.2;
+  filter: drop-shadow(0 0 16px rgba(255, 79, 216, 0.30));
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* scanning line */
+/* scan line */
 .scan{
   position:absolute;
   top:0;
   left:-10px;
   width: 4px;
   height: 100%;
-  background: rgba(255, 61, 110, 0.75);
-  box-shadow: 0 0 20px rgba(255, 61, 110, 0.55);
+  background: rgba(255, 23, 68, 0.55);
+  box-shadow: 0 0 24px rgba(255, 23, 68, 0.35);
   opacity:0;
 }
-
 .heartbeat.real.running .scan{
   opacity:1;
-  animation: scanMove 1.15s linear infinite;
+  animation: scanMove 1.25s linear infinite;
 }
-
 @keyframes scanMove{
   0%{ transform: translateX(-10px); }
   100%{ transform: translateX(580px); }
@@ -335,16 +357,16 @@ body{
   width: min(860px, 100%);
   padding: 22px 22px;
   border-radius: 26px;
-  background: rgba(255,255,255,0.50);
-  border: 1px solid rgba(255,255,255,0.72);
-  box-shadow: 0 16px 44px rgba(0,0,0,0.12);
-}
 
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 145, 210, 0.14);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+}
 .letter{
   font-size: 18px;
   line-height: 1.9;
   font-weight: 600;
-  color: rgba(36,16,19,0.86);
+  color: rgba(255,240,248,0.92);
   white-space: pre-wrap;
 }
 
@@ -357,49 +379,43 @@ body{
   gap:12px;
   flex-wrap:wrap;
 }
-
 .hudItem{
   padding: 10px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.54);
-  border: 1px solid rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 145, 210, 0.12);
   font-weight: 900;
+  color: var(--txt);
 }
-
 .gameArea{
   margin-top: 18px;
   width: min(920px, 100%);
   height: 320px;
 
   border-radius: 28px;
-  background: rgba(255,255,255,0.34);
-  border: 1px solid rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 145, 210, 0.10);
 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
   position:relative;
   overflow:hidden;
-
-  box-shadow: 0 18px 55px rgba(0,0,0,0.12);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.55);
 }
-
 .heartTarget{
   position:absolute;
   font-size: 44px;
   cursor:pointer;
   user-select:none;
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.10));
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,0.45));
   animation: popIn .20s ease;
 }
 @keyframes popIn{
   from{ transform: scale(.6); opacity:0; }
   to{ transform: scale(1); opacity:1; }
 }
-
-#gameBtn{
-  margin-top: 18px;
-}
+#gameBtn{ margin-top: 18px; }
 
 /* ===========================
    GIFT
@@ -410,38 +426,67 @@ body{
   padding: 22px;
   border-radius: 28px;
 
-  background: rgba(255,255,255,0.50);
-  border: 1px solid rgba(255,255,255,0.72);
-  box-shadow: 0 16px 44px rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 145, 210, 0.14);
+  box-shadow: 0 20px 70px rgba(0,0,0,0.55);
 }
-
 .plan{
   margin: 10px 0 18px 18px;
-  color: rgba(36,16,19,0.82);
+  color: rgba(255,240,248,0.82);
   line-height: 1.9;
   font-weight: 600;
 }
 
+/* ===========================
+   PHOTO REVEAL (grand + sweet)
+=========================== */
 .photoWrap{
   margin-top: 18px;
   display:none;
+  position: relative;
 }
-
 .photoWrap.show{
   display:block;
-  animation: grandReveal 1s cubic-bezier(.2,.9,.2,1);
+  animation: grandReveal 1.9s cubic-bezier(.2,.9,.2,1);
+}
+
+.photoWrap::after{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius: 26px;
+  pointer-events:none;
+  opacity:0;
+}
+.photoWrap.show::after{
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 35%,
+    rgba(255, 79, 216, 0.16) 50%,
+    rgba(255, 23, 68, 0.10) 60%,
+    transparent 100%
+  );
+  filter: blur(2px);
+  animation: shineSweep 1.6s ease forwards;
+}
+
+@keyframes shineSweep{
+  0%{ opacity:0; transform: translateX(-60%) }
+  25%{ opacity:1 }
+  100%{ opacity:0; transform: translateX(60%) }
 }
 
 @keyframes grandReveal{
   0%{
     opacity: 0;
-    transform: translateY(26px) scale(0.92);
-    filter: blur(10px);
+    transform: translateY(34px) scale(0.90);
+    filter: blur(14px);
   }
-  45%{
+  55%{
     opacity: 1;
-    transform: translateY(-6px) scale(1.03);
-    filter: blur(3px);
+    transform: translateY(-10px) scale(1.02);
+    filter: blur(4px);
   }
   100%{
     opacity: 1;
@@ -453,11 +498,46 @@ body{
 .photo{
   width: min(620px, 100%);
   border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.80);
+  border: 1px solid rgba(255, 145, 210, 0.12);
   box-shadow:
-    0 22px 70px rgba(0,0,0,0.18),
-    0 0 0 10px rgba(255,255,255,0.20);
+    0 30px 95px rgba(0,0,0,0.76),
+    0 0 0 10px rgba(255, 79, 216, 0.06),
+    0 0 70px rgba(255, 23, 68, 0.10);
   transform-origin: center;
+}
+
+/* ===========================
+   YES BUTTON = strongest glow
+=========================== */
+#yesBtn{
+  position: relative;
+  isolation: isolate;
+  transform: translateZ(0);
+  box-shadow:
+    0 24px 90px rgba(255, 23, 68, 0.32),
+    0 0 70px rgba(255, 79, 216, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+#yesBtn::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 79, 216, 0.50), transparent 62%),
+    radial-gradient(circle at 70% 70%, rgba(255, 23, 68, 0.48), transparent 60%);
+  filter: blur(14px);
+  opacity: 0.85;
+  z-index: -1;
+  animation: yesGlow 2.2s ease-in-out infinite;
+}
+#yesBtn:hover{
+  transform: translateY(-3px) scale(1.03);
+  filter: brightness(1.08);
+}
+@keyframes yesGlow{
+  0%,100%{ transform: scale(1); opacity: 0.75; }
+  50%{ transform: scale(1.06); opacity: 1; }
 }
 
 /* ===========================
@@ -503,14 +583,14 @@ body{
   right: 18px;
 }
 
-/* Start step button improvements */
+/* Start step */
 #step-start{
-  text-align: center; /* centers the content nicely */
+  text-align: center;
 }
 
 #step-start .btn{
-  margin: 18px auto 0;  /* center horizontally */
-  padding: 18px 34px;   /* bigger button */
+  margin: 18px auto 0;
+  padding: 18px 34px;
   font-size: 18px;
   border-radius: 22px;
 }
@@ -526,22 +606,18 @@ body{
   font-size: 34px !important;
   line-height: 1.6 !important;
   font-weight: 700 !important;
-  color: rgba(36,16,19,0.78) !important;
+  color: rgba(255,240,248,0.82) !important;
 }
-
 #step-start .tiny{
   font-size: 24px !important;
   line-height: 1.7 !important;
   font-weight: 650 !important;
+  color: rgba(255,240,248,0.78) !important;
 }
 
 @media(max-width: 520px){
-  #step-start #startLine{
-    font-size: 22px !important;
-  }
-  #step-start .tiny{
-    font-size: 16px !important;
-  }
+  #step-start #startLine{ font-size: 22px !important; }
+  #step-start .tiny{ font-size: 16px !important; }
 }
 
 /* ===========================
@@ -553,44 +629,33 @@ body{
   place-items:center;
   gap:10px;
 }
-
 .letterTap{
   width: 120px;
   height: 120px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.72);
-  background: rgba(255,255,255,0.55);
-  box-shadow: 0 18px 55px rgba(0,0,0,0.14);
+  border: 1px solid rgba(255, 145, 210, 0.14);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 22px 70px rgba(0,0,0,0.60);
   cursor:pointer;
   font-size: 58px;
   display:grid;
   place-items:center;
   transition: transform .15s ease, filter .15s ease;
 }
-
 .letterTap:hover{
   transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.02);
+  filter: brightness(1.05);
 }
-
-.letterTap:active{
-  transform: scale(.96);
-}
-
+.letterTap:active{ transform: scale(.96); }
 .letterHint{
   margin-top: 6px;
   opacity: .8;
 }
-
-.letterBox.hidden{
-  display:none;
-}
-
+.letterBox.hidden{ display:none; }
 .letterBox.open{
   display:block;
   animation: letterIn .55s cubic-bezier(.2,.9,.2,1);
 }
-
 @keyframes letterIn{
   from{ opacity:0; transform: translateY(12px) scale(.98); }
   to{ opacity:1; transform: translateY(0) scale(1); }
@@ -605,7 +670,6 @@ body{
     margin .45s ease,
     padding .45s ease;
 }
-
 .letterTapWrap.hide{
   opacity:0;
   transform: translateY(-10px) scale(0.95);
@@ -616,23 +680,21 @@ body{
   padding:0;
   overflow:hidden;
 }
-
 .letterTap{
   transition: opacity .45s ease, transform .45s ease;
 }
-
 .letterTap.hideBtn{
   opacity:0;
   transform: scale(0.5) rotate(-10deg);
 }
 
+/* Next reveal */
 .hiddenNext{
   opacity: 0;
   transform: translateY(10px) scale(0.98);
   pointer-events: none;
   transition: opacity .45s ease, transform .45s ease;
 }
-
 .hiddenNext.show{
   opacity: 1;
   transform: translateY(0px) scale(1);
@@ -644,35 +706,113 @@ body{
   margin-top: 12px;
   font-size: 30px;
   font-weight: 900;
-  color: rgba(36,16,19,0.88);
+  color: rgba(255,240,248,0.90);
   letter-spacing: 0.2px;
 }
-
 @media(max-width: 520px){
-  .bigQuestion{
-    font-size: 22px;
-  }
+  .bigQuestion{ font-size: 22px; }
 }
 
-#step-propose{
-  position: relative;
-}
-
-#yesBtn{
-  z-index: 5;
-}
-
-#noBtn{
-  z-index: 4;
-}
+#step-propose{ position: relative; }
+#yesBtn{ z-index: 5; }
+#noBtn{ z-index: 4; }
 
 .proposalRow{
   position: relative;
   min-height: 90px;
 }
 
-/* Smooth NO movement (no lag) */
+/* Smooth NO movement */
 #noBtn{
   transition: transform 0.18s cubic-bezier(.2,.9,.2,1);
   will-change: transform;
+}
+
+/* Countdown overlay */
+.countdown{
+  margin-top: 18px;
+  font-family: var(--font1);
+  font-size: 48px;
+  font-weight: 800;
+  text-align:center;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity .35s ease, transform .35s ease;
+  color: rgb(255, 251, 251);
+}
+
+.countdown.show{
+  opacity: 1;
+  transform: translateY(0px) scale(1);
+}
+
+@media(max-width: 520px){
+  .countdown{
+    font-size: 36px;
+  }
+}
+
+/* ===========================
+   Kiss spam feature (after photo)
+=========================== */
+/* Kiss spam feature (below gift text) */
+.kissPanel{
+  margin: 14px 0 0;
+  display: none;
+  text-align: center;
+}
+
+.kissPanel.show{
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  animation: kissPanelIn 0.65s cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes kissPanelIn{
+  from{ opacity:0; transform: translateY(14px) scale(.98); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+.kissBtn{
+  width: 86px;
+  height: 86px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.82);
+  background: rgba(255, 255, 255, 0.831);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.16);
+  cursor:pointer;
+
+  font-size: 48px;
+  display:grid;
+  place-items:center;
+
+  transition: transform .12s ease, filter .12s ease;
+}
+
+.kissBtn:hover{
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.02);
+}
+
+.kissBtn:active{
+  transform: scale(.92);
+}
+
+.kissText{
+  font-size: 17px;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+  opacity: 0.8;
+}
+
+@media(max-width: 520px){
+  .kissBtn{
+    width: 76px;
+    height: 76px;
+    font-size: 44px;
+  }
+  .kissText{
+    font-size: 15px;
+  }
 }
