@@ -501,7 +501,7 @@ function endGame() {
   gameBtn.textContent = "Play again";
   gameBtn.disabled = false;
 
-  const target = 2;                  //No of hearts to be catched
+  const target = 27;                  //No of hearts to be catched
 
   if (score >= target) {
     next3.disabled = false;
