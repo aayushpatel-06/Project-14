@@ -447,7 +447,7 @@ body{
 }
 .photoWrap.show{
   display:block;
-  animation: grandReveal 1.9s cubic-bezier(.2,.9,.2,1);
+  animation: grandReveal 1s cubic-bezier(.2,.9,.2,1);
 }
 
 .photoWrap::after{
