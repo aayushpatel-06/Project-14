@@ -15,5 +15,5 @@ Niti… 💗
   noMessage: "Wrong answer 😤💗 Try again 😏",
 
   // Gift screen text extras (we can expand later if you want)
-  giftRevealButton: "Reveal something special 🥹"
+  giftRevealButton: "Reveal something Special 🥺"
 };
